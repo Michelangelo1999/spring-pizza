@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity //devo mettere solo questa quando la tabella a cui appoggiarmi deve essere creata e non la tengo già
 public class Pizza {
@@ -18,6 +19,7 @@ public class Pizza {
 	@Column(nullable = false, unique = true)
 	private String name;
 	
+	@Lob
 	private String description;
 	
 	@Column(nullable = false)

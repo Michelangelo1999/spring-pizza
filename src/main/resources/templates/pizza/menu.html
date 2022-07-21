@@ -13,7 +13,7 @@
     
     <h1 class="mx-auto mb-3 mt-3 w-50 text-center">Le nostre pizze!</h1>
     
-    <table class="table mb-3">
+    <table class="table mb-3" th:if="${menu.size() > 0}">
     <thead>
     <tr>
     <th>Name</th>
@@ -30,6 +30,10 @@
     </tr>
     </tbody>
     </table>
+    
+    <div class="alert alert-info my-5" th:unless="${menu.size() > 0}">
+  	<h3>There are no pizzas yet</h3>
+  </div>
     
     <a class="btn btn-primary" th:href="@{/add}">Add a pizza</a>
     </div>
