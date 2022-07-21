@@ -8,6 +8,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 @Entity //devo mettere solo questa quando la tabella a cui appoggiarmi deve essere creata e non la tengo già
 public class Pizza {
@@ -16,12 +21,16 @@ public class Pizza {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+//	@UniqueElements(message="le pizze devono avere nomi diversi")
+	@NotEmpty
 	@Column(nullable = false, unique = true)
 	private String name;
 	
 	@Lob
 	private String description;
 	
+	@NotNull
+	@Min(value = 4, message = "Il prezzo di una pizza deve essere almeno €4.00")
 	@Column(nullable = false)
 	private BigDecimal price;
 
