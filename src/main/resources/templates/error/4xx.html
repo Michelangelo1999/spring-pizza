@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="/fragments/resource :: head-resource"></div>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+  
+   <div class="container">
+    <div class="alert alert-warning">
+       <h1>OOOOOPS an error occured</h1>
+       <h2>Resource not found</h2>
+    </div>
+    
+    <div th:text="${status}"></div>
+    <div th:text="${error}"></div>
+    <div th:text="${message}"></div>
+    <hr>
+    <div>
+    <a class="btn btn-primary" href="/">Back to home</a>   
+    </div>
+
+   <div th:replace="/fragments/resource :: script"></div>
+     </body>
+</html>

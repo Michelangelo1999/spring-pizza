@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="/fragments/resource :: head-resource"></div>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+    <nav th:replace="/fragments/navbar :: navbar(menu)"></nav>
+    
+    
+    <div class="container">
+    
+    <h1 class="mx-auto mb-3 mt-3 w-50 text-center">Le nostre pizze!</h1>
+    
+    <table class="table mb-3">
+    <thead>
+    <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Price</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    <tr th:each="m : ${menu}">
+    <td th:text="${m.name}"></td>
+    <td th:text="${m.description}"></td>
+    <td th:text="'€ ' + ${m.price}"></td>
+    </tr>
+    </tbody>
+    </table>
+    
+    <a class="btn btn-primary" th:href="@{/add}">Add a pizza</a>
+    </div>
+    
+    <div th:replace="/fragments/resource :: script"></div>
+     </body>
+</html>
