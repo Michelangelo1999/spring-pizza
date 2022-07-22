@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <div th:replace="/fragments/resource :: head-resource"></div>
-    <title>Hello, world!</title>
+    <title>Form</title>
   </head>
   <body>
     
@@ -18,25 +18,43 @@
  th:method="POST"
  >
  
- <ul>
- <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>
- </ul>
+<!-- <ul>-->
+<!-- <li th:each="err : ${#fields.allErrors()}" th:text="${err}"></li>-->
+<!-- </ul>-->
+
+<!-- campo nascosto -->
+<input type="hidden" th:field="*{id}">
   
   <div class="row mb-3 mt-4">
   <div class="col-6">
-    <label class="form-label" for="Name">Name</label>
-    <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Enter name">
-  </div>
+    <label class="form-label" for="name">Name</label>
+    <input type="text" class="form-control" th:field="*{name}" id="name" placeholder="Enter name" th:errorClass="is-invalid">
+    <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+    <ul>
+    <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+    </ul>
+    </div>
+    </div>
   
   <div class="col-6">
     <label class="form-label" for="price">Price</label>
-    <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Enter price">
+    <input type="text" class="form-control" th:field="*{price}" id="price" placeholder="Enter price" th:errorClass="is-invalid">
+    <div th:if="${#fields.hasErrors('price')}" class="invalid-feedback">
+    <ul>
+    <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>
+    </ul>
+    </div>
   </div>
  </div>
   
   <div class="mb-3">
     <label class="form-label" for="description">Description</label>
-    <textarea class="form-control" th:field="*{description}" id="synopsis" placeholder="Enter description"></textarea>
+    <textarea class="form-control" th:field="*{description}" id="synopsis" placeholder="Enter description" th:errorClass="is-invalid"></textarea>
+    <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+    <ul>
+    <li th:each="err : ${#fields.errors('description')}" th:text="${err}"></li>
+    </ul>
+    </div>
   </div>
   
   <button class="btn btn-primary" type="submit">Save</button>
