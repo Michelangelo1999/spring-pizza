@@ -21,7 +21,7 @@ public class Pizza {
 	
 //	@UniqueElements(message="le pizze devono avere nomi diversi")
 	@NotEmpty(message="la pizza deve avere un nome")
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	private String name;
 	
 	@Lob

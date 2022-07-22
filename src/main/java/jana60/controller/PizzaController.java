@@ -3,8 +3,6 @@ package jana60.controller;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -57,8 +55,16 @@ public class PizzaController {
 	}
 	
 	@PostMapping("/save")
-	public String doCreatePizza(@Validated @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult, Model model) {
-		if(bindingResult.hasErrors() || repo.countByName(formPizza.getName()) > 0) {
+	public String doCreatePizza(@Validated @ModelAttribute("pizza") Pizza formPizza, BindingResult bindingResult) {
+		Boolean validateName = true;
+		if(formPizza.getId() != null) {  //cioè se la pizza non è muova ma arriva da una modifica, quindi ha un id
+			Pizza pizzaBeforeUpdate = repo.findById(formPizza.getId()).get();
+			if(pizzaBeforeUpdate.getName().equalsIgnoreCase(formPizza.getName())) {
+				validateName = false;
+			}
+		}
+		
+		if(bindingResult.hasErrors() || repo.countByName(formPizza.getName()) > 0 && validateName) {
 			bindingResult.addError(new FieldError("Pizza", "name", "Hai già una pizza con questo nome"));
 			return "/pizza/edit";
 		}
