@@ -8,9 +8,20 @@
     
     <nav th:replace="/fragments/navbar :: navbar(menu)"></nav>
     
+    <h1 class="text-center mg-auto " th:text="${pizza.id != null} ? 'Modifica Pizza' : 'Crea una nuova pizza!'"></h1>
+     <hr/>
+     
+    <div class="container d-flex">
     
-    <div class="container">
-    <form
+<!--    <div th:switch="${user.role}">-->
+<!--  <p th:case="'admin'">User is an administrator</p>-->
+<!--  <p th:case="#{roles.manager}">User is a manager</p>-->
+<!--</div>-->
+
+     
+    
+   
+    <form class="col-8"
     
  id="form-pizza" 
  th:object="${pizza}" 
@@ -60,6 +71,13 @@
   <button class="btn btn-primary" type="submit">Save</button>
   
 </form>
+
+<div class="col-4">
+<h6>Ingredienti</h6>
+<div class="form-check" th:each="ing : ${ingredienti}">
+<input class="form-check-input" th:field="*{ingredienti}" type="checkbox" th:id="|ingredienti_${ing.id}|" th:value="${ing.id}">
+<label class="form check-label" th:for="|ingredienti_${ing.id}|" th:text="${ing.name}"></label>
+</div>
 
     </div>
     

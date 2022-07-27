@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jana60.model.Pizza;
+import jana60.repository.IngredientiRepository;
 import jana60.repository.PizzaRepository;
 
 @Controller
@@ -28,6 +29,9 @@ public class PizzaController {
 	
 	@Autowired
 	PizzaRepository repo;
+	
+	@Autowired
+	IngredientiRepository ingredientiRepo;
 	
 	@GetMapping
 	public String menuPizze(Model model) {
@@ -51,6 +55,7 @@ public class PizzaController {
 	@GetMapping("/add")
 	public String pizzaForm(Model model) {
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("ingredienti", ingredientiRepo.findAllByOrderByName());
 		return "/pizza/edit";
 	}
 	
@@ -90,6 +95,7 @@ public class PizzaController {
 		Optional<Pizza> result = repo.findById(pizzaId);
 		if(result.isPresent()) {
 			model.addAttribute("pizza", result.get());
+			model.addAttribute("ingredienti", ingredientiRepo.findAllByOrderByName());
 			return "/pizza/edit";
 		} else {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "la pizza con id " + pizzaId + " non è presente nel menu");

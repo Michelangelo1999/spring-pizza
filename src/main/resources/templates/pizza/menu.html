@@ -20,6 +20,7 @@
     <tr>
     <th>Name</th>
     <th>Description</th>
+    <th>Ingredients</th>
     <th>Price</th>
     <th>Action</th>
     </tr>
@@ -29,6 +30,9 @@
     <tr th:each="m : ${menu}">
     <td th:text="${m.name}"></td>
     <td th:text="${m.description}"></td>
+    <td>
+    <ul><li th:each="ing : ${ingredienti}" th:text="${ing.name}"></li></ul>
+    </td>
     <td th:text="'€ ' + ${m.price}"></td>
     <td>
     <a class="btn btn-primary" title="edit" th:href="@{|/edit/${m.id}|}"><i class="fa-solid fa-pen-to-square text-light"></i></a>
