@@ -31,10 +31,11 @@
     <td th:text="${m.name}"></td>
     <td th:text="${m.description}"></td>
     <td>
-    <ul><li th:each="ing : ${ingredienti}" th:text="${ing.name}"></li></ul>
+    <ul><li th:each="ing : ${m.ingredienti}" th:text="${ing.name}"></li></ul>
     </td>
     <td th:text="'€ ' + ${m.price}"></td>
     <td>
+    <a class="btn btn-primary" title="detail" th:href="@{|/detail/${m.id}|}"><i class="fa-solid fa-info"></i></a>    <!--non funzionante per ora-->
     <a class="btn btn-primary" title="edit" th:href="@{|/edit/${m.id}|}"><i class="fa-solid fa-pen-to-square text-light"></i></a>
     <a class="btn btn-primary" title="delete" th:href="@{|/delete/${m.id}|}"><i class="fa-solid fa-trash-can text-light" onclick="return confirm('Are you sure?')"></i></a>
     </td>

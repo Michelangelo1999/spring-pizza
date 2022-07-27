@@ -102,6 +102,12 @@ public class PizzaController {
 		}
 	}
 	
+//	//per il detail
+//	@GetMappin("/detail/{id}")
+//	public String pizzaDetail() {
+//		
+//	}
+	
 	
 	
 	

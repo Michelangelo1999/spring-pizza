@@ -11,7 +11,7 @@
     <h1 class="text-center mg-auto " th:text="${pizza.id != null} ? 'Modifica Pizza' : 'Crea una nuova pizza!'"></h1>
      <hr/>
      
-    <div class="container d-flex">
+    <div class="container">
     
 <!--    <div th:switch="${user.role}">-->
 <!--  <p th:case="'admin'">User is an administrator</p>-->
@@ -21,7 +21,7 @@
      
     
    
-    <form class="col-8"
+    <form class="container d-flex"
     
  id="form-pizza" 
  th:object="${pizza}" 
@@ -34,6 +34,7 @@
 <!-- </ul>-->
 
 <!-- campo nascosto -->
+<div class="col-8">
 <input type="hidden" th:field="*{id}">
   
   <div class="row mb-3 mt-4">
@@ -69,15 +70,18 @@
   </div>
   
   <button class="btn btn-primary" type="submit">Save</button>
-  
-</form>
+</div>
 
-<div class="col-4">
+  <div class="col-4">
 <h6>Ingredienti</h6>
 <div class="form-check" th:each="ing : ${ingredienti}">
 <input class="form-check-input" th:field="*{ingredienti}" type="checkbox" th:id="|ingredienti_${ing.id}|" th:value="${ing.id}">
 <label class="form check-label" th:for="|ingredienti_${ing.id}|" th:text="${ing.name}"></label>
 </div>
+  
+</form>
+
+
 
     </div>
     
