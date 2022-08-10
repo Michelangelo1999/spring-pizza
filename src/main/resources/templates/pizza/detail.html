@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="/fragments/resource :: head-resource"></div>
+    <title th:text="${pizza.name}"></title>
+  </head>
+  <body>
+    
+    <nav th:replace="/fragments/navbar :: navbar(menu)"></nav>
+    
+    <h1 th:text="${pizza.name}" class="mx-auto mb-3 mt-3 w-50 text-center"></h1>
+    <h2 th:text="'€ ' + ${pizza.price}" class="mx-auto mb-3 mt-3 w-50 text-center"></h2>
+    <hr>
+    
+    <!-- Voglio due colonne -> div class row -->
+    <div class="row d-flex justify-content-around">
+    	<div class="col-6">
+    		<dl class="row">
+  				<dt class="col-sm-3">Description</dt>
+  				<dd class="col-sm-9" th:text="${pizza.description}"></dd>
+			</dl>
+			<dl class="row">
+  				<dt class="col-sm-3">Price</dt>
+  				<dd class="col-sm-9" th:text="${pizza.price}"></dd>
+			</dl>
+    	</div>
+		<div class="col-3">
+			<h6>Ingredients</h6>
+			<ul>
+				<li th:each="ing : ${pizza.ingredienti}" th:text="${ing.name}"></li>
+			</ul>
+    	</div>
+    </div>	
+    
+    <hr>
+    
+    <div class="">
+    <h3 class="text-center">Order</h3>
+    <table class="table mx-3">
+    
+    <thead>
+    <tr>
+    <th>Data prenotazione</th>
+    <th>Data consegna</th>
+    <th>Note</th>
+    <th>Utente</th>
+    </tr>
+    </thead>
+    
+    <tbody>
+    <tr th:each="ord : ${pizza.ordinazione}">
+    <td th:text="${ord.dataPrenotazione}"></td>
+    <td th:text="${ord.dataConsegna}"></td>
+    <td th:text="${ord.note}"></td>
+    <td th:text="${ord.utente.email}"></td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    
+    
+    <div class="text-center"> 
+    <a class="btn btn-primary w-25 mg-auto mb-3 mt-3 text-center" th:href="@{|/ordinazione/${pizza.id}|}">Add an order</a>
+    </div>
+    
+    <div th:replace="/fragments/resource :: script"></div>
+     </body>
+</html>

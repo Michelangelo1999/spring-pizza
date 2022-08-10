@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <div th:replace="/fragments/resource :: head-resource"></div>
+    <title th:text="${ordinazione.pizza.name}"></title>
+  </head>
+  <body>
+    
+    <nav th:replace="/fragments/navbar :: navbar(menu)"></nav>
+    
+    <h1 th:text="${ordinazione.pizza.name}" class="mx-auto mb-3 mt-3 w-50 text-center"></h1>
+<!--    <h2 th:text="'€ ' + ${pizza.price}" class="mx-auto mb-3 mt-3 w-50 text-center"></h2>-->
+    <hr>
+    <form class="col-9"
+    id="ordinazione-form"
+    th:action="@{/ordinazione/save}"
+    method="POST"
+    th:object="${ordinazione}"
+    >
+    
+    <input type="hidden" th:field="*{id}">
+    
+    <div class="mb-3">
+    <label class="form-label" for="dataOrdinazione">Data ordinazione</label>
+    <input type="date" class="form-control" th:field="*{dataOrdinazione}" id="dataOrdinazione" placeholder="Enter data" th:errorClass="is-invalid">
+    <div th:if="${#fields.hasErrors('dataOrdinazione')}" class="invalid-feedback">
+    <ul>
+    <li th:each="err : ${#fields.errors('dataOrdinazione')}" th:text="${err}"></li>
+    </ul>
+    </div>
+    </div>
+    
+    <div class="mb-3">
+    <label class="form-label" for="dataConsegna">Data consegna</label>
+    <input type="date" class="form-control" th:field="*{dataConsegna}" id="dataConsegna" placeholder="Enter data" th:errorClass="is-invalid">
+    <div th:if="${#fields.hasErrors('dataConsegna')}" class="invalid-feedback">
+    <ul>
+    <li th:each="err : ${#fields.errors('dataConsegna')}" th:text="${err}"></li>
+    </ul>
+    </div>
+    </div>
+    
+    <div class="mb-3">
+    <label class="form-label" for="note">Note</label>
+    <input type="text" class="form-control" th:field="*{note}" id="note" placeholder="Enter notes" th:errorClass="is-invalid">
+    <div th:if="${#fields.hasErrors('note')}" class="invalid-feedback">
+    <ul>
+    <li th:each="err : ${#fields.errors('note')}" th:text="${err}"></li>
+    </ul>
+    </div>
+    </div>
+    
+    <div class="mb-3">
+    <label class="form-label" for="utente">Utenti</label>
+    <select class="custom-select">
+    <option selected>Select a user</option>
+    <option th:each="user : ${userList}" th:value="${user.id}" th:text="${user.email}"></option>
+	</select>
+    </div>
+    
+    <div> 
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a class="btn btn-primary" th:href="@{|/detail/${ordinazione.pizza.id}|}">Cancel</a>
+    
+    </form>
+    
+    
+    
+    <div th:replace="/fragments/resource :: script"></div>
+     </body>
+</html>

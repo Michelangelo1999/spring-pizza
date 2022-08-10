@@ -29,3 +29,16 @@ INSERT INTO pizza_ingredienti (pizze_id, ingredienti_id) VALUES(4, 1);
 INSERT INTO pizza_ingredienti (pizze_id, ingredienti_id) VALUES(3, 5);
 INSERT INTO pizza_ingredienti (pizze_id, ingredienti_id) VALUES(5, 7);
 INSERT INTO pizza_ingredienti (pizze_id, ingredienti_id) VALUES(5, 8);
+
+insert into utente(name, surname, email) values("miki", "de nicola", "mikidenicola007@gmail.com");
+insert into utente(name, surname, email) values("anna", "de mizio", "annam@gmail.com");
+insert into utente(name, surname, email) values("marco", "carta", "marcoc@gmail.com");
+insert into utente(name, surname, email) values("enza", "de nicola", "enzaden@gmail.com");
+insert into utente(name, surname, email) values("rosi", "de cragno", "cragno@gmail.com");
+insert into utente(name, surname, email) values("john", "smith", "jsm@gmail.com");
+insert into utente(name, surname, email) values("bob", "smith", "boooob@gmail.com");
+
+
+
+
+

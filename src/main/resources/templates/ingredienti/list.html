@@ -15,6 +15,28 @@
     
     <h1 class="mx-auto mb-3 mt-3 w-50 text-center">Gli ingredienti che utilizziamo!</h1>
     
+    <hr>
+    
+    <form 
+				id="form-ingredienti" 
+				th:object="${newIngrediente}"
+				th:action="@{/ingredienti/save}" 
+				method="POST">
+				
+				<div class="input-group mb-3 has-validation">
+					<input th:field="*{name}" type="text" class="form-control"
+						placeholder="Add an ingredient" aria-label="Add an ingredient"
+						aria-describedby="category-button" th:errorClass="is-invalid">
+					<button class="btn btn-primary" type="submit" id="category-button">Save</button>
+					<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+						<ul>
+							<li th:each="err : ${#fields.errors('name')}" th:text="${err}">
+						</ul>
+					</div>		
+				</div>
+				
+			</form>
+    
     <table class="table mb-3" th:if="${ingredienti.size() > 0}">
     <thead>
     <tr>

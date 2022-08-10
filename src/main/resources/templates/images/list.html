@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <div th:replace="/fragments/resource :: head-resource"></div>
+    <title>Pizza Images</title>
+  </head>
+  <body>
+    
+    <nav th:replace="/fragments/navbar :: navbar(ingredienti)"></nav>
+    
+    
+    <div class="container">
+    
+<!--    <div class="mt-3 mb-3 alert alert-success" th:if="${successSms != null && successSms != ''}" th:text="${successSms}"></div>-->
+    
+    <h1 class="mx-auto mb-3 mt-3 w-50 text-center">Pizza images</h1>
+    <h3 class="mx-auto mb-3 mt-3 w-50 text-center" th:text="${imageForm.pizza.name}"></h3>
+    
+    <hr>
+<!--form mappata su un oggetto di tipo imageform-->
+    <form 
+				id="form-img" 
+				th:object="${imageForm}"
+				th:action="@{/image/save}" 
+				method="POST"
+				enctype="multipart/form-data"
+				>
+				
+				<input type="hidden" th:field="*{pizza}">
+				
+				<div class="mb-3">
+   				<label for="contentMultipart" class="form-label">Add a new image</label>
+				 <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">  <!--mappato sul contentMultipart attributo dell'oggetto imageForm'-->
+				
+				</div>
+				
+				<button  class="btn btn-primary" type="submit">Save</button>
+			    
+				
+			</form>
+			
+			<div class="row">
+			<div class="col-4" th:each="img : ${imageList}">
+			<img th:src="@{|/image/${img.id}/content|}" class="img-fluid" alt="">
+			</div>
+			</div>
+    
+    
+  </div>
+    
+<!--    <a class="btn btn-primary" th:href="@{/ingredienti/add}">Add an ingredient</a>-->
+    </div>
+    
+    <div th:replace="/fragments/resource :: script"></div>
+     </body>
+</html>

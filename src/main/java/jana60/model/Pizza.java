@@ -11,9 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity //devo mettere solo questa quando la tabella a cui appoggiarmi deve essere creata e non la tengo già
 public class Pizza {
@@ -37,12 +41,23 @@ public class Pizza {
 	private BigDecimal price;
 	
 	@ManyToMany
+	@JsonBackReference
 	@JoinTable(name="", joinColumns = {}, inverseJoinColumns = {})
 	List<Ingrediente> ingredienti;
 
+	@OneToOne
+	private Ordinazione ordinazione;
 	
 	//getters and setters
 	
+	public Ordinazione getOrdinazione() {
+		return ordinazione;
+	}
+
+	public void setOrdinazione(Ordinazione ordinazione) {
+		this.ordinazione = ordinazione;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -82,6 +97,8 @@ public class Pizza {
 	public void setIngredienti(List<Ingrediente> ingredienti) {
 		this.ingredienti = ingredienti;
 	}
+	
+	
 	
 	
 	

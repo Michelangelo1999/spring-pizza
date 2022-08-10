@@ -6,9 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Ingrediente {
@@ -21,6 +22,7 @@ public class Ingrediente {
 	private String name;
 	
 	@ManyToMany(mappedBy="ingredienti")
+	@JsonManagedReference
 	List<Pizza> pizze;
 
 	public Integer getId() {

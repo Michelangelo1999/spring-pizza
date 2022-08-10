@@ -1,5 +1,6 @@
 package jana60.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jana60.model.Ordinazione;
 import jana60.model.Pizza;
 import jana60.repository.IngredientiRepository;
 import jana60.repository.PizzaRepository;
@@ -102,11 +104,25 @@ public class PizzaController {
 		}
 	}
 	
-//	//per il detail
-//	@GetMappin("/detail/{id}")
-//	public String pizzaDetail() {
-//		
-//	}
+	//per il detail
+	@GetMapping("/detail/{id}")
+	public String pizzaDetail(@PathVariable("id") Integer pizzaId, Model model) {
+		
+		Optional<Pizza> pizza = repo.findById(pizzaId);
+		if(pizza.isPresent()) {
+			model.addAttribute("pizza", pizza.get());
+			
+			return "/pizza/detail";
+		}else {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza with id " + pizzaId + " is not present");
+		}
+		
+		
+	}
+	
+	
+	
+	
 	
 	
 	
